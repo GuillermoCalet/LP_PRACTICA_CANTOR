@@ -1,0 +1,36 @@
+# Fibonacci using primrec. main returns only fib(n), not the whole sequence.
+main fibonacci
+extended
+import relationals
+
+define two
+    [Constant 2]
+    compair add k_1 k_1
+
+define is_base
+    [i < 2]
+    compair lt id two
+
+define prev1
+    [s(i-1) from <i.previous_results>]
+    comp fst snd
+
+define previous_tail
+    [Drop s(i-1)]
+    comp snd snd
+
+define prev2
+    [s(i-2) from <i.previous_results>]
+    comp fst previous_tail
+
+define fib_step
+    [s(i-1) + s(i-2)]
+    compair add prev1 prev2
+
+define fib_sequence
+    [Sequence <fib(n).<fib(n-1)...<fib(0).0>>>]
+    primrec is_base id fib_step
+
+define fibonacci
+    [nth Fibonacci number]
+    comp fst fib_sequence

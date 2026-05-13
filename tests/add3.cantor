@@ -1,0 +1,18 @@
+main add3
+extended
+
+define third
+    [Third element of a three-value input]
+    comp snd snd
+
+define second
+    [Second element of a three-value input]
+    comp fst snd
+
+define add23
+    [Second plus third]
+    compair add second third
+
+define add3
+    [Sum of three input values]
+    compair add fst add23

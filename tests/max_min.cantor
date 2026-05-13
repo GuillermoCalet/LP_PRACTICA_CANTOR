@@ -1,0 +1,56 @@
+# Max, min and a value-level conditional over triples <p.<a.b>>.
+main max
+extended
+import relationals
+
+define second
+    [Second value in a triple]
+    comp fst snd
+
+define third
+    [Third value in a triple]
+    comp snd snd
+
+define predicate
+    [Normalize first value of triple as boolean]
+    comp sign fst
+
+define not_predicate
+    [Negated predicate]
+    comp not fst
+
+define then_part
+    [p * a]
+    compair mul predicate second
+
+define else_part
+    [not(p) * b]
+    compair mul not_predicate third
+
+define cond
+    [if p then a else b]
+    compair add then_part else_part
+
+define mm_y_minus_x
+    [max(0, y - x)]
+    compair diff snd fst
+
+define max
+    [Maximum of <x.y>]
+    compair add fst mm_y_minus_x
+
+define mm_x_minus_y
+    [max(0, x - y)]
+    comp diff id
+
+define min
+    [Minimum of <x.y>]
+    compair diff fst mm_x_minus_y
+
+define max2_args
+    [Build <gt(x,y).<x.y>> for cond]
+    pair gt id
+
+define max2
+    [Maximum using cond]
+    comp cond max2_args

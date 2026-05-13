@@ -1,0 +1,52 @@
+# Division, modulo and parity. Division assumes divisor > 0.
+main mod
+extended
+import relationals
+
+define vx
+    [x in <<x.y>.q>]
+    comp fst fst
+
+define vy
+    [y in <<x.y>.q>]
+    comp snd fst
+
+define q1
+    [q + 1 in <<x.y>.q>]
+    compair add snd k_1
+
+define yq1
+    [y * (q + 1)]
+    compair mul vy q1
+
+define test_quotient
+    [Find first q such that y*(q+1) > x]
+    compair gt yq1 vx
+
+define div
+    [Integer quotient by linear search]
+    mu test_quotient
+
+define yq
+    [y * div(x,y)]
+    compair mul snd div
+
+define mod
+    [x mod y]
+    compair diff fst yq
+
+define two
+    [Constant 2]
+    compair add k_1 k_1
+
+define pair_with_two
+    [Pair x with 2]
+    pair id two
+
+define rem_two
+    [x mod 2]
+    comp mod pair_with_two
+
+define even
+    [1 iff x is even]
+    comp not rem_two

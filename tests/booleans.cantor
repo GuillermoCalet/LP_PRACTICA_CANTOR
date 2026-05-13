@@ -1,0 +1,19 @@
+# Boolean functions over 0=false and 1=true.
+main and
+import core
+
+define and
+    [Boolean conjunction on <a.b>]
+    comp sign mul
+
+define or
+    [Boolean disjunction on <a.b>]
+    comp sign add
+
+define not_pair
+    [Pair 1 with sign(x)]
+    pair k_1 sign
+
+define not
+    [Boolean negation; any positive input counts as true]
+    comp diff not_pair

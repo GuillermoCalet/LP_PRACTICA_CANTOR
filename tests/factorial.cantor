@@ -1,0 +1,24 @@
+# Extra primrec example for oral defense.
+main factorial
+extended
+import relationals
+
+define is_base
+    [i == 0]
+    compair eq id zero
+
+define previous
+    [s(i-1)]
+    comp fst snd
+
+define fact_step
+    [i * s(i-1)]
+    compair mul fst previous
+
+define fact_sequence
+    [Sequence of factorial values]
+    primrec is_base k_1 fact_step
+
+define factorial
+    [n!]
+    comp fst fact_sequence

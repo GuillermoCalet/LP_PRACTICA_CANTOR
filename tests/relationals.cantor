@@ -1,0 +1,28 @@
+# Relational functions over encoded pairs <x.y>.
+main eq
+extended
+import booleans
+
+define gt
+    [x > y]
+    comp sign diff
+
+define y_minus_x
+    [max(0, y - x)]
+    compair diff snd fst
+
+define lt
+    [x < y]
+    comp sign y_minus_x
+
+define neq_sum
+    [gt(x,y) + lt(x,y)]
+    compair add gt lt
+
+define neq
+    [x != y]
+    comp sign neq_sum
+
+define eq
+    [x == y]
+    comp not neq

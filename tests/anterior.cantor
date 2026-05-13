@@ -1,0 +1,9 @@
+main anterior
+
+define pair_with_one
+    [Pair x with 1]
+    pair id k_1
+
+define anterior
+    [Predecessor with lower bound 0]
+    comp diff pair_with_one

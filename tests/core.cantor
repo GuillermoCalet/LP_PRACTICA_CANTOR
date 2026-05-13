@@ -1,0 +1,26 @@
+# Basic helpers shared by the examples.
+main sign
+
+define zero_pair
+    [Pair x with itself so diff returns 0]
+    pair id id
+
+define zero
+    [Constant 0]
+    comp diff zero_pair
+
+define ant_pair
+    [Pair x with 1]
+    pair id k_1
+
+define ant
+    [Predecessor with lower bound 0]
+    comp diff ant_pair
+
+define sign_pair
+    [Pair x with its predecessor]
+    pair id ant
+
+define sign
+    [0 maps to 0, positive numbers map to 1]
+    comp diff sign_pair

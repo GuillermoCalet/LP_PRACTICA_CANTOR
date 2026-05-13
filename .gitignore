@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+
+cantorLexer.py
+cantorParser.py
+cantorVisitor.py
+cantor*.tokens
+cantor*.interp
+
+exprs*
+lp/
+.agents/
+.codex/
