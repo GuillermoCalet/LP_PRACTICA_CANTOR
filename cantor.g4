@@ -1,9 +1,13 @@
+// Nombre de la gramatica. ANTLR generara cantorLexer.py, cantorParser.py
+// y cantorVisitor.py a partir de este archivo.
 grammar cantor;
 
+// Regla inicial: un programa es una secuencia de sentencias hasta EOF.
 program
     : statement* EOF
     ;
 
+// Una sentencia puede ser una directiva o una definicion.
 statement
     : mainDecl
     | importDecl
@@ -11,22 +15,29 @@ statement
     | definition
     ;
 
+// main nombre_funcion
 mainDecl
     : MAIN NAME
     ;
 
+// import nombre_sin_extension
 importDecl
     : IMPORT NAME
     ;
 
+// extended
 extendedDecl
     : EXTENDED
     ;
 
+// define nombre
+//     [documentacion]
+//     expresion
 definition
     : DEFINE NAME DOC expression
     ;
 
+// Las alternativas con #Nombre generan metodos visitNombre en el visitor.
 expression
     : PAIR NAME NAME                 # PairExpr
     | COMP NAME NAME                 # CompExpr
@@ -35,6 +46,7 @@ expression
     | PRIMREC NAME NAME NAME         # PrimrecExpr
     ;
 
+// Palabras reservadas del lenguaje.
 MAIN: 'main';
 IMPORT: 'import';
 EXTENDED: 'extended';
@@ -45,8 +57,14 @@ MU: 'mu';
 COMPAIR: 'compair';
 PRIMREC: 'primrec';
 
+// Bloque de documentacion. Acepta cualquier caracter excepto ].
 DOC: '[' ~']'* ']';
+
+// Identificadores de funciones e imports.
 NAME: [a-zA-Z_][a-zA-Z_0-9]*;
 
+// Comentarios desde # hasta final de linea.
 COMMENT: '#' ~[\r\n]* -> skip;
+
+// Espacios, tabs y saltos de linea se ignoran.
 WS: [ \t\r\n]+ -> skip;

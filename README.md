@@ -98,6 +98,32 @@ Els fitxers generats com `cantorLexer.py`, `cantorParser.py`,
 `cantorVisitor.py`, `.tokens` i `.interp` es creen amb `make` i no s'han
 d'incloure al ZIP final.
 
+## Quins requisits necessita?
+
+Cal tenir Python 3, Java i el runtime de ANTLR per a Python.
+
+El projecte inclou `antlr-4.13.2-complete.jar`. El `Makefile` utilitza primer
+aquest `.jar` local per generar el parser, així no depèn d'internet ni del
+wrapper `antlr4` instal·lat amb `pip`.
+
+Opcio recomanada amb entorn virtual:
+
+```bash
+python3 -m venv lp
+source lp/bin/activate
+python3 -m pip install antlr4-python3-runtime==4.13.2
+```
+
+Opcio amb instal·lacio d'usuari:
+
+```bash
+python3 -m pip install --user antlr4-python3-runtime==4.13.2
+```
+
+El codi no modifica `sys.path` per buscar entorns locals. Per tant,
+`python3 cantor.py ...` s'ha d'executar amb un Python que ja pugui importar
+`antlr4`.
+
 ## Com l'he d'executar?
 
 Primer genera el parser:
@@ -116,6 +142,12 @@ Executa tots els tests:
 
 ```bash
 make test
+```
+
+Si vols usar un Python concret, per exemple el de l'entorn local `lp/`:
+
+```bash
+make test PYTHON=lp/bin/python3
 ```
 
 Neteja els fitxers generats:
