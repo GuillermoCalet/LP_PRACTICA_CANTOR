@@ -1,4 +1,5 @@
-// Nombre de la gramatica. ANTLR generara cantorLexer.py, cantorParser.py
+
+// Nombre de la gramática. ANTLR generará cantorLexer.py, cantorParser.py
 // y cantorVisitor.py a partir de este archivo.
 grammar cantor;
 
@@ -7,7 +8,7 @@ program
     : statement* EOF
     ;
 
-// Una sentencia puede ser una directiva o una definicion.
+// Una sentencia puede ser una directiva o una definición.
 statement
     : mainDecl
     | importDecl
@@ -68,3 +69,7 @@ COMMENT: '#' ~[\r\n]* -> skip;
 
 // Espacios, tabs y saltos de linea se ignoran.
 WS: [ \t\r\n]+ -> skip;
+
+// Cualquier otro carácter produce un token inesperado y acaba en error
+// sintáctico controlado por el listener del intérprete.
+LEXICAL_ERROR: .;

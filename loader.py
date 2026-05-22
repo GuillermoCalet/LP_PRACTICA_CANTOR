@@ -247,7 +247,7 @@ class ProgramLoader:
         self.main_name = None
 
     def load(self, path: Path) -> LoadedProgram:
-        """Load a main .cantor file and return an executable program."""
+        """Carga un archivo principal .cantor y devuelve un programa ejecutable."""
 
         # Normalizamos la ruta del archivo principal.
         main_path = self._normalize_path(path)
@@ -255,7 +255,6 @@ class ProgramLoader:
         # Fase 1: cargar y parsear archivo principal e imports.
         self._load_file(main_path, is_main=True)
 
-        # Validaciones que requieren haber leido todas las definiciones.
         self._validate()
 
         # Fase 2: convertir definiciones en funciones Python ejecutables.

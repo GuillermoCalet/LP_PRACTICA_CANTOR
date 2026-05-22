@@ -1,4 +1,4 @@
-# Fibonacci using primrec. main returns only fib(n), not the whole sequence.
+# Fibonacci using primrec.
 main fibonacci
 extended
 import relationals
@@ -27,10 +27,6 @@ define fib_step
     [s(i-1) + s(i-2)]
     compair add prev1 prev2
 
-define fib_sequence
-    [Sequence <fib(n).<fib(n-1)...<fib(0).0>>>]
-    primrec is_base id fib_step
-
 define fibonacci
     [nth Fibonacci number]
-    comp fst fib_sequence
+    primrec is_base id fib_step

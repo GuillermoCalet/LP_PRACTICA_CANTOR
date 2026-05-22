@@ -1,47 +1,45 @@
-.RECIPEPREFIX := >
-
-# Usamos primero el jar local para no depender de internet.
-# Algunos comandos antlr4 instalados con pip intentan descargar cosas.
-ANTLR_JAR := antlr-4.13.2-complete.jar
-
-# Archivo fuente de la gramatica.
+# Gramàtica ANTLR4 del llenguatge Cantor.
 GRAMMAR := cantor.g4
 
-# Python que se usara para los tests. Por defecto usa python3 del sistema.
-# Si quieres usar un entorno virtual:
-#   make test PYTHON=lp/bin/python3
-PYTHON ?= python3
+# Jar local d'ANTLR. El projecte no depèn del wrapper antlr4 ni d'internet.
+ANTLR_JAR := antlr-4.13.2-complete.jar
+ANTLR_FLAGS := -Dlanguage=Python3 -no-listener -visitor
 
-# Archivos que genera ANTLR. No se editan a mano ni se entregan en el ZIP.
+# Si existeix l'entorn virtual lp/, l'usem per defecte; si no, usem python3.
+PYTHON ?= $(shell if [ -x lp/bin/python3 ]; then printf 'lp/bin/python3'; else printf 'python3'; fi)
+
+# Fitxers generats per ANTLR. No s'editen a mà.
 GENERATED := cantorLexer.py cantorParser.py cantorVisitor.py \
              cantor.interp cantor.tokens cantorLexer.interp cantorLexer.tokens
 
-# Declaramos objetivos que no son archivos reales.
-.PHONY: all antlr clean test
+.PHONY: all antlr install test examples doctest run clean
 
-# Objetivo por defecto: preparar el parser.
 all: antlr
-> @echo "ANTLR parser ready."
 
-# antlr depende de los archivos generados.
-antlr: $(GENERATED)
+antlr: $(GRAMMAR)
+	@if [ -f "$(ANTLR_JAR)" ]; then \
+		java -jar $(ANTLR_JAR) $(ANTLR_FLAGS) $(GRAMMAR); \
+	elif command -v antlr4 >/dev/null 2>&1; then \
+		antlr4 $(ANTLR_FLAGS) $(GRAMMAR); \
+	else \
+		echo "ANTLR not found. Place $(ANTLR_JAR) here or install antlr4."; \
+		exit 1; \
+	fi
 
-# Si falta algun generado, o cantor.g4 es mas nuevo, se ejecuta esta regla.
-$(GENERATED): $(GRAMMAR)
-> @if [ -f "$(ANTLR_JAR)" ]; then \
->     java -jar $(ANTLR_JAR) -Dlanguage=Python3 -no-listener -visitor $(GRAMMAR); \
-> elif command -v antlr4 >/dev/null 2>&1; then \
->     antlr4 -Dlanguage=Python3 -no-listener -visitor $(GRAMMAR); \
-> else \
->     echo "ANTLR not found. Install antlr4 or place $(ANTLR_JAR) here."; \
->     exit 1; \
-> fi
+install:
+	$(PYTHON) -m pip install antlr4-python3-runtime==4.13.2
 
-# Ejecuta la bateria de pruebas.
-test: antlr
-> $(PYTHON) tests/run_tests.py
+test: antlr examples doctest
 
-# Borra archivos generados y caches.
+examples:
+	$(PYTHON) tests/run_tests.py
+
+doctest:
+	$(PYTHON) -m doctest -v test.txt
+
+run: antlr
+	echo "6 2 13" | $(PYTHON) cantor.py tests/add3.cantor
+
 clean:
-> rm -f $(GENERATED)
-> rm -rf __pycache__ tests/__pycache__
+	rm -f $(GENERATED)
+	rm -rf __pycache__ tests/__pycache__ .antlr

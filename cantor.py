@@ -4,14 +4,14 @@
 # argparse sirve para leer argumentos de linea de comandos.
 import argparse
 
-# sys nos da acceso a stdin, stderr y argv.
+# sys  da acceso a stdin, stderr y argv.
 import sys
 
 
-# Excepciones propias: asi mostramos errores limpios al usuario.
+# Excepciones , asi muestro errores limpios.
 from errors import CantorError, CantorInputError, CantorRuntimeError
 
-# del codigo loader (que hemos programado), importamos la funcion load_program, que se encarga de cargar un progrma 
+# del codigo loader importo la funcion load_program
 from loader import load_program
 
 # encode_input transforma la lista de stdin en un unico natural de Cantor.
@@ -22,9 +22,9 @@ def parse_stdin(text: str) -> list[int]:
     """Transforma el texto de stdin en una lista de números naturales.
 
     Input:
-        Texto de stdin, for example "1 3 2\n".
+        Texto de stdin, por ejemplo "1 3 2\n".
     Return:
-        Una lista de números naturales, for example [1, 3, 2].
+        Una lista de números naturales, por ejemplo [1, 3, 2].
     Por que:
         Para que a los archvios .canto, les llegue una lista de naturales, 
         que es lo que se pide. 
@@ -70,9 +70,9 @@ def build_argument_parser() -> argparse.ArgumentParser: # esta funcion devuelve 
     return parser
 
 
-def run(script: str, stdin_text: str) -> int: #devuelvo un entero (0 bien : 1 mal)
-    # aqui definimos que la funcion, tiene dos variables como parametro 
-    # por un lado, tenemos script que es un string, y stdin_text, que es el texto que llega por stdin, tambien un string.
+def run(script: str, stdin_text: str) -> int: #devuelvo un entero (0 bien, 1 ha salido por excepcion)
+    # la funcion, tiene dos variables como parametro : 
+    # tenemos script, y stdin_text, que es el texto que llega por stdin
 
     """Carga, codifica, ejecuta y muestra el resultado de un programa Cantor."""
 
@@ -90,13 +90,11 @@ def run(script: str, stdin_text: str) -> int: #devuelvo un entero (0 bien : 1 ma
         # 4. Ejecutamos la funcion main del programa Cantor.
         result = program.main_function(encoded_input)
     except RecursionError as exc:
-        # Por si un programa produce recursion demasiado profunda en Python.
-        raise CantorRuntimeError("maximum Python recursion depth reached") from exc
+        raise CantorRuntimeError("Python recursion profundidad maxima ") from exc
 
     # 5. La salida correcta va por stdout.
     print(result)
 
-    # 0 significa "todo ha ido bien" en programas de terminal.
     return 0
 
 

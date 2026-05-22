@@ -1,4 +1,3 @@
-"""Common exceptions and ANTLR error collection for the Cantor interpreter."""
 
 try:
     # ErrorListener es la clase base de ANTLR para reaccionar a errores.

@@ -1,4 +1,4 @@
-# Extra primrec example for oral defense.
+# Factorial using primrec, following the statement example.
 main factorial
 extended
 import relationals
@@ -15,10 +15,6 @@ define fact_step
     [i * s(i-1)]
     compair mul fst previous
 
-define fact_sequence
-    [Sequence of factorial values]
-    primrec is_base k_1 fact_step
-
 define factorial
     [n!]
-    comp fst fact_sequence
+    primrec is_base k_1 fact_step

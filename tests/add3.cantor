@@ -2,17 +2,17 @@ main add3
 extended
 
 define third
-    [Third element of a three-value input]
+    [Tercer element d' un input de tres valors]
     comp snd snd
 
 define second
-    [Second element of a three-value input]
+    [Segon element d'un input de tres valors]
     comp fst snd
 
 define add23
-    [Second plus third]
+    [Segon mes tercer]
     compair add second third
 
 define add3
-    [Sum of three input values]
+    [Suma de els tres valors]
     compair add fst add23

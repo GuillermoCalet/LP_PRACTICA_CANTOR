@@ -26,7 +26,7 @@ def require_natural(value: int, name: str = "value") -> None:
 
     # bool tambien es int en Python, pero en esta practica solo generamos ints.
     # La comprobacion importante es que el valor no sea negativo y que sea un entero.
-    if not isinstance(value, int) or value < 0: 
+    if not isinstance(value, int) or value < 0:
         raise CantorRuntimeError(f"{name} el numero debe ser natural ")
 
 
@@ -77,8 +77,8 @@ def encode_input(values: list[int]) -> int:
 
     # Primero validamos que todos los valores sean naturales.
     for index, value in enumerate(values):
-        require_natural(value, f"input[{index}]") # si no lo son, saldremos 
-        #del programa por la excepcion que tiene dentro requiere_natural 
+        require_natural(value, f"input[{index}]") # si no lo son, saldremos
+        #del programa por la excepcion que tiene dentro requiere_natural
 
     if not values:
         return 0
@@ -90,7 +90,7 @@ def encode_input(values: list[int]) -> int:
     # Despues emparejamos de derecha a izquierda:
     # result = pi(3, 2), luego result = pi(1, result).
 
-    #recorremos el values sin el ultimo elemento, y del reves 
+    #recorremos el values sin el ultimo elemento, y del reves
     for value in reversed(values[:-1]):
         result = pi(value, result)
     return result
@@ -181,7 +181,7 @@ def mu_limit() -> int:
 
 
 def make_mu(predicate: NaturalFunction) -> NaturalFunction:
-    
+
     def search(x: int) -> int:
         limit = mu_limit()
 
@@ -207,7 +207,6 @@ def make_primrec(
     base_case: NaturalFunction,
     recursive_step: NaturalFunction,
 ) -> NaturalFunction:
-    
 
     def evaluate(bound: int) -> int:
         require_natural(bound, "primrec input")
@@ -215,6 +214,7 @@ def make_primrec(
         # previous_results contiene la lista codificada de resultados ya
         # calculados. Al principio no hay resultados, por eso usamos 0.
         previous_results = 0
+        value = 0
 
         # Calculamos s(0), s(1), ..., s(bound).
         for index in range(bound + 1):
@@ -232,7 +232,7 @@ def make_primrec(
             # <s(i).<s(i-1).<...>>>.
             previous_results = pi(value, previous_results)
 
-        return previous_results
+        return value
 
-    # Devolvemos la funcion que sabe calcular la secuencia hasta bound.
+    # Devolvemos la funcion que sabe calcular el valor final hasta bound.
     return evaluate

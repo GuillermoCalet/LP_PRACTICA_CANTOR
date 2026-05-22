@@ -1,0 +1,60 @@
+>>> from cantor import parse_stdin, run
+>>> from runtime import encode_input, pi, unpi
+
+===================================================
+CODIFICACIO DE CANTOR
+===================================================
+
+>>> pi(47, 32)
+3192
+
+>>> unpi(3192)
+(47, 32)
+
+>>> parse_stdin('1 3 2')
+[1, 3, 2]
+
+>>> encode_input([1, 3, 2])
+188
+
+>>> encode_input([])
+0
+
+===================================================
+PROGRAMES CANTOR
+===================================================
+
+>>> _ = run('tests/add3.cantor', '6 2 13')
+21
+
+>>> _ = run('tests/anterior.cantor', '7')
+6
+
+>>> _ = run('tests/cond.cantor', '1 42 7')
+42
+
+>>> _ = run('tests/cond.cantor', '0 42 7')
+7
+
+>>> _ = run('tests/factorial.cantor', '5')
+120
+
+>>> _ = run('tests/fibonacci.cantor', '6')
+8
+
+===================================================
+VALIDACIO D'ENTRADA
+===================================================
+
+>>> parse_stdin('10 0 5')
+[10, 0, 5]
+
+>>> parse_stdin('-1')
+Traceback (most recent call last):
+...
+errors.CantorInputError: el valor del input '-1' no es mayor o igual a 0
+
+>>> parse_stdin('hola')
+Traceback (most recent call last):
+...
+errors.CantorInputError: el valor del input 'hola' no es un entero
