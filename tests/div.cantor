@@ -1,0 +1,27 @@
+main div
+extended
+import relacionals
+
+define vx
+    [x a <<x.y>.q>]
+    comp fst fst
+
+define vy
+    [y a <<x.y>.q>]
+    comp snd fst
+
+define q1
+    [q+1 a <<x.y>.q>]
+    compair add snd k_1
+
+define yq1
+    [y*(q+1) a <<x.y>.q>]
+    compair mul vy q1
+
+define test_quotient
+    [Test_Quocient per mu(q)-divisió, y*(q+1) > x a <<x.y>.q>]
+    compair gt yq1 vx
+
+define div
+    [Quocient de la divisió per cerca lineal]
+    mu test_quotient

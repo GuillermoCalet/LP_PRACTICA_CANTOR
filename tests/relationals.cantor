@@ -1,4 +1,4 @@
-# Relational functions over encoded pairs <x.y>.
+# Funcions relacionals sobre parelles codificades <x.y>.
 main eq
 extended
 import booleans

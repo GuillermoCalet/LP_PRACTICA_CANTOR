@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run .cantor examples and compare them with their .out files."""
+"""Executa exemples .cantor i els compara amb els fitxers .out."""
 
 from pathlib import Path
 import subprocess

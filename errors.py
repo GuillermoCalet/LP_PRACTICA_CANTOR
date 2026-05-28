@@ -6,39 +6,39 @@ except ModuleNotFoundError:
     # Si falta antlr4, dejamos una clase minima para que el import no explote.
     # loader.py mostrara luego un error claro explicando que falta ANTLR.
     class ErrorListener:
-        """Fallback so missing ANTLR runtime becomes a clean load error later."""
+        """Substitut perquè la falta del runtime ANTLR generi un error clar."""
 
         pass
 
 
 class CantorError(Exception):
-    """Base class for user-facing interpreter errors."""
+    """Classe base dels errors de l'intèrpret mostrats a l'usuari."""
 
 
 # Cada excepcion representa un tipo de problema. Todas heredan de CantorError,
 # asi cantor.py puede capturarlas juntas y escribir "Error: ...".
 class CantorSyntaxError(CantorError):
-    """Raised when ANTLR reports one or more syntax errors."""
+    """Es produeix quan ANTLR informa d'un o més errors de sintaxi."""
 
 
 class CantorLoadError(CantorError):
-    """Raised when a program or one of its imports cannot be loaded."""
+    """Es produeix quan no es pot carregar un programa o algun import."""
 
 
 class CantorValidationError(CantorError):
-    """Raised when the parsed program is syntactically valid but unusable."""
+    """Es produeix quan el programa és sintàcticament vàlid però inutilitzable."""
 
 
 class CantorRuntimeError(CantorError):
-    """Raised when evaluation cannot finish cleanly."""
+    """Es produeix quan l'avaluació no pot acabar correctament."""
 
 
 class CantorInputError(CantorError):
-    """Raised when stdin does not contain a list of natural numbers."""
+    """Es produeix quan stdin no conté una llista de nombres naturals."""
 
 
 class CollectingErrorListener(ErrorListener):
-    """Collects ANTLR syntax errors instead of printing them directly."""
+    """Recull els errors de sintaxi d'ANTLR en lloc de mostrar-los directament."""
 
     def __init__(self, path):
         super().__init__()

@@ -1,4 +1,4 @@
-"""Runtime support for the Cantor language."""
+"""Suport d'execució per al llenguatge Cantor."""
 
 # math.isqrt calcula raices cuadradas enteras exactas, sin floats.
 import math
@@ -14,7 +14,6 @@ from errors import CantorRuntimeError
 
 # En el lenguaje Cantor toda funcion tiene tipo:
 #   natural -> natural
-# En Python lo escribimos como Callable[[int], int].
 NaturalFunction = Callable[[int], int]
 
 # Limite por defecto para la busqueda de mu.
@@ -22,7 +21,7 @@ DEFAULT_MU_LIMIT = 100000
 
 
 def require_natural(value: int, name: str = "value") -> None:
-    """Mira si un numero es natual o no """
+    """Comprova si un nombre és natural."""
 
     # bool tambien es int en Python, pero en esta practica solo generamos ints.
     # La comprobacion importante es que el valor no sea negativo y que sea un entero.
@@ -41,19 +40,9 @@ def pi(x: int, y: int) -> int:
 
 
 def unpi(z: int) -> tuple[int, int]:
-    """Inverse of the Cantor pairing function.
+    """Donat un nombre z, retorna la parella (x, y) tal que pi(x, y) == z.
 
-    Problem solved:
-        Recovers the two components encoded by pi.
-    Input:
-        One natural z.
-    Return:
-        A pair (x, y) such that pi(x, y) == z.
-    Why this way:
-        Cantor numbers grow by diagonals. isqrt gives the diagonal exactly
-        without floating-point rounding problems.
-    Small test:
-        unpi(3192) == (47, 32).
+    És la funció inversa de pi.
     """
 
     require_natural(z, "z")
@@ -97,7 +86,7 @@ def encode_input(values: list[int]) -> int:
 
 
 def base_functions() -> dict[str, NaturalFunction]:
-    """Return the predefined functions available in basic mode."""
+    """Retorna les funcions predefinides disponibles en el mode bàsic."""
 
     # add, mul y diff reciben una pareja ya codificada.
     # Por eso lo primero es hacer unpi.
@@ -125,7 +114,7 @@ def base_functions() -> dict[str, NaturalFunction]:
 
 
 def extended_functions() -> dict[str, NaturalFunction]:
-    """Return the predefined functions added by extended mode."""
+    """Retorna les funcions predefinides afegides pel mode estès."""
 
     # fst y snd son las proyecciones de una pareja codificada.
     return {
@@ -135,7 +124,7 @@ def extended_functions() -> dict[str, NaturalFunction]:
 
 
 def make_pair(f_func: NaturalFunction, g_func: NaturalFunction) -> NaturalFunction:
-    """Build pair f g: x -> pi(f(x), g(x))."""
+    """Construeix pair f g: x -> pi(f(x), g(x))."""
 
     # Devuelve una nueva funcion. No se ejecuta f_func ni g_func ahora;
     # se ejecutaran cuando la funcion resultante reciba una x.
@@ -143,7 +132,7 @@ def make_pair(f_func: NaturalFunction, g_func: NaturalFunction) -> NaturalFuncti
 
 
 def make_comp(f_func: NaturalFunction, g_func: NaturalFunction) -> NaturalFunction:
-    """Build comp f g: x -> f(g(x))."""
+    """Construeix comp f g: x -> f(g(x))."""
 
     # Primero se aplica g a x. Despues se aplica f al resultado.
     return lambda x: f_func(g_func(x))
@@ -154,7 +143,7 @@ def make_compair(
     g_func: NaturalFunction,
     h_func: NaturalFunction,
 ) -> NaturalFunction:
-    """Build compair f g h: x -> f(pi(g(x), h(x)))."""
+    """Construeix compair f g h: x -> f(pi(g(x), h(x)))."""
 
     # Es una abreviatura de:
     #   pair_result = pi(g(x), h(x))
@@ -163,7 +152,10 @@ def make_compair(
 
 
 def mu_limit() -> int:
-    """Read the search limit used by mu from the environment."""
+    """Llegeix el límit de cerca de mu de la variable d'entorn CANTOR_MU_LIMIT.
+
+    Si no està definida, retorna el límit per defecte.
+    """
 
     # Si el usuario no define nada, usamos el limite por defecto.
     raw_value = os.environ.get("CANTOR_MU_LIMIT")

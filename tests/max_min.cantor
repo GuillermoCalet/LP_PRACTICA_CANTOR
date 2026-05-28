@@ -1,22 +1,22 @@
-# Max, min and a value-level conditional over triples <p.<a.b>>.
+# Màxim, mínim i condicional de valors sobre triples <p.<a.b>>.
 main max
 extended
 import relationals
 
 define second
-    [Second value in a triple]
+    [Segon valor en un triple]
     comp fst snd
 
 define third
-    [Third value in a triple]
+    [Tercer valor en un triple]
     comp snd snd
 
 define predicate
-    [Normalize first value of triple as boolean]
+    [Normalitza el primer valor del triple com a booleà]
     comp sign fst
 
 define not_predicate
-    [Negated predicate]
+    [Predicat negat]
     comp not fst
 
 define then_part
@@ -28,7 +28,7 @@ define else_part
     compair mul not_predicate third
 
 define cond
-    [if p then a else b]
+    [si p llavors a altrament b]
     compair add then_part else_part
 
 define mm_y_minus_x
@@ -36,7 +36,7 @@ define mm_y_minus_x
     compair diff snd fst
 
 define max
-    [Maximum of <x.y>]
+    [Màxim de <x.y>]
     compair add fst mm_y_minus_x
 
 define mm_x_minus_y
@@ -44,13 +44,13 @@ define mm_x_minus_y
     comp diff id
 
 define min
-    [Minimum of <x.y>]
+    [Mínim de <x.y>]
     compair diff fst mm_x_minus_y
 
 define max2_args
-    [Build <gt(x,y).<x.y>> for cond]
+    [Construeix <gt(x,y).<x.y>> per a cond]
     pair gt id
 
 define max2
-    [Maximum using cond]
+    [Màxim usant cond]
     comp cond max2_args

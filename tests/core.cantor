@@ -1,26 +1,26 @@
-# Basic helpers shared by the examples.
+# Ajudants bàsics compartits pels exemples.
 main sign
 
 define zero_pair
-    [Pair x with itself so diff returns 0]
+    [Aparella x amb ell mateix perquè diff retorni 0]
     pair id id
 
 define zero
     [Constant 0]
     comp diff zero_pair
 
-define ant_pair
-    [Pair x with 1]
+define aparella_amb_1
+    [Aparella l'entrada x amb 1: <x.1>]
     pair id k_1
 
-define ant
-    [Predecessor with lower bound 0]
-    comp diff ant_pair
+define anterior
+    [Anterior amb limit 0]
+    comp diff aparella_amb_1
 
 define sign_pair
-    [Pair x with its predecessor]
-    pair id ant
+    [Aparella x amb el seu predecessor]
+    pair id anterior
 
 define sign
-    [0 maps to 0, positive numbers map to 1]
+    [0 es transforma en 0, els nombres positius es transformen en 1]
     comp diff sign_pair

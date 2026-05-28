@@ -1,19 +1,19 @@
-# Boolean functions over 0=false and 1=true.
+# Funcions booleanes amb 0=fals i 1=cert.
 main and
 import core
 
 define and
-    [Boolean conjunction on <a.b>]
+    [Conjunció booleana sobre <a.b>]
     comp sign mul
 
 define or
-    [Boolean disjunction on <a.b>]
+    [Disjunció booleana sobre <a.b>]
     comp sign add
 
 define not_pair
-    [Pair 1 with sign(x)]
+    [Aparella 1 amb sign(x)]
     pair k_1 sign
 
 define not
-    [Boolean negation; any positive input counts as true]
+    [Negació booleana; qualsevol entrada positiva compta com a cert]
     comp diff not_pair

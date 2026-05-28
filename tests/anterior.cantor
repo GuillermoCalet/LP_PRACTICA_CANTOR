@@ -1,9 +1,9 @@
 main anterior
 
-define pair_with_one
-    [Pair x with 1]
+define aparella_amb_1
+    [Aparella l'entrada x amb 1: <x.1>]
     pair id k_1
 
 define anterior
-    [Predecessor with lower bound 0]
-    comp diff pair_with_one
+    [Anterior amb limit 0]
+    comp diff aparella_amb_1

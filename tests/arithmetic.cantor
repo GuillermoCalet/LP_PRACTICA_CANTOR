@@ -1,18 +1,18 @@
-# Division, modulo and parity. Division assumes divisor > 0.
+# Divisió, mòdul i paritat. La divisió assumeix divisor > 0.
 main mod
 extended
 import relationals
 
 define vx
-    [x in <<x.y>.q>]
+    [x dins <<x.y>.q>]
     comp fst fst
 
 define vy
-    [y in <<x.y>.q>]
+    [y dins <<x.y>.q>]
     comp snd fst
 
 define q1
-    [q + 1 in <<x.y>.q>]
+    [q + 1 dins <<x.y>.q>]
     compair add snd k_1
 
 define yq1
@@ -20,11 +20,11 @@ define yq1
     compair mul vy q1
 
 define test_quotient
-    [Find first q such that y*(q+1) > x]
+    [Troba el primer q tal que y*(q+1) > x]
     compair gt yq1 vx
 
 define div
-    [Integer quotient by linear search]
+    [Quocient enter per cerca lineal]
     mu test_quotient
 
 define yq
@@ -40,7 +40,7 @@ define two
     compair add k_1 k_1
 
 define pair_with_two
-    [Pair x with 2]
+    [Aparella x amb 2]
     pair id two
 
 define rem_two
@@ -48,5 +48,5 @@ define rem_two
     comp mod pair_with_two
 
 define even
-    [1 iff x is even]
+    [1 si i només si x és parell]
     comp not rem_two

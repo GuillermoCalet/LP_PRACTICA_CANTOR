@@ -1,4 +1,4 @@
-"""Loading, parsing and building Cantor programs."""
+"""Carrega, analitza i construeix programes Cantor."""
 
 # dataclass evita escribir clases llenas de __init__ manuales.
 from dataclasses import dataclass
@@ -37,7 +37,7 @@ except ModuleNotFoundError:
     # rompa al importar loader.py. Dejamos una clase minima y luego damos un
     # error claro cuando realmente se intente cargar un programa.
     class cantorVisitor:
-        """Fallback used only to let cantor.py print a clean error pre-make."""
+        """Substitut usat perquè cantor.py mostri un error clar abans de make."""
 
         pass
 
@@ -74,7 +74,7 @@ def _load_antlr_classes():
 
 @dataclass(frozen=True)
 class Definition:
-    """Intermediate representation of a Cantor function definition."""
+    """Representació intermèdia de la definició d'una funció Cantor."""
 
     # Nombre de la funcion definida con "define nombre".
     name: str
@@ -95,7 +95,7 @@ class Definition:
 
 @dataclass
 class ParsedFile:
-    """Information extracted from one .cantor file."""
+    """Informació extreta d'un fitxer .cantor."""
 
     # Ruta del archivo parseado.
     path: Path
@@ -115,7 +115,7 @@ class ParsedFile:
 
 @dataclass
 class LoadedProgram:
-    """Executable program built from parsed definitions."""
+    """Programa executable construït a partir de les definicions analitzades."""
 
     # Nombre de la funcion principal.
     main_name: str
@@ -134,7 +134,7 @@ class LoadedProgram:
 
 
 class ProgramVisitor(cantorVisitor):
-    """Extract main/import/extended directives and definitions from the tree."""
+    """Extreu les directives main/import/extended i les definicions de l'arbre."""
 
     def __init__(self, path: Path):
         # Guardamos la ruta para meterla en cada Definition.
@@ -231,7 +231,7 @@ class ProgramVisitor(cantorVisitor):
 
 
 class ProgramLoader:
-    """Load a main file plus imports, then build executable closures."""
+    """Carrega el fitxer principal, els imports i les funcions executables."""
 
     def __init__(self):
         # Rutas ya cargadas. Evita cargar dos veces y evita bucles de imports.
@@ -247,7 +247,7 @@ class ProgramLoader:
         self.main_name = None
 
     def load(self, path: Path) -> LoadedProgram:
-        """Carga un archivo principal .cantor y devuelve un programa ejecutable."""
+        """Carrega un fitxer principal .cantor i retorna un programa executable."""
 
         # Normalizamos la ruta del archivo principal.
         main_path = self._normalize_path(path)
@@ -471,7 +471,7 @@ class ProgramLoader:
 
 
 def load_program(path: str | Path) -> LoadedProgram:
-    """Convenience function used by cantor.py."""
+    """Funció auxiliar utilitzada per cantor.py."""
 
     # Funcion pequena para que cantor.py no tenga que crear ProgramLoader.
     return ProgramLoader().load(Path(path))

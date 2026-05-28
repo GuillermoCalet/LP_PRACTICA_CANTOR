@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Command-line entry point for the Cantor interpreter."""
+"""Punt d'entrada de la línia d'ordres de l'intèrpret Cantor."""
 
 # argparse sirve para leer argumentos de linea de comandos.
 import argparse
@@ -19,16 +19,16 @@ from runtime import encode_input
 
 
 def parse_stdin(text: str) -> list[int]:
-    """Transforma el texto de stdin en una lista de números naturales.
+    """Transforma el text de stdin en una llista de nombres naturals.
 
-    Input:
-        Texto de stdin, por ejemplo "1 3 2\n".
-    Return:
-        Una lista de números naturales, por ejemplo [1, 3, 2].
-    Por que:
-        Para que a los archvios .canto, les llegue una lista de naturales, 
-        que es lo que se pide. 
-    Ejemplo:
+    Entrada:
+        Text de stdin, per exemple "1 3 2\n".
+    Retorn:
+        Una llista de nombres naturals, per exemple [1, 3, 2].
+    Per què:
+        Perquè als fitxers .cantor els arribi una llista de naturals,
+        que és el que es demana.
+    Exemple:
         parse_stdin("1 3 2") == [1, 3, 2].
     """
 
@@ -74,7 +74,7 @@ def run(script: str, stdin_text: str) -> int: #devuelvo un entero (0 bien, 1 ha 
     # la funcion, tiene dos variables como parametro : 
     # tenemos script, y stdin_text, que es el texto que llega por stdin
 
-    """Carga, codifica, ejecuta y muestra el resultado de un programa Cantor."""
+    """Carrega, codifica, executa i mostra el resultat d'un programa Cantor."""
 
     # 1. Cargamos el programa Cantor.
     program = load_program(script)

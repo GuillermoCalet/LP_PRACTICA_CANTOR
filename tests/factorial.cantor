@@ -1,20 +1,24 @@
-# Factorial using primrec, following the statement example.
+# Factorial usant primrec, seguint l'exemple de l'enunciat.
 main factorial
 extended
-import relationals
+import relacionals
 
-define is_base
-    [i == 0]
-    compair eq id zero
+define k_0
+    [0]
+    compair diff k_1 k_1
 
-define previous
-    [s(i-1)]
+define segon
+    [2on]
     comp fst snd
 
-define fact_step
-    [i * s(i-1)]
-    compair mul fst previous
+define is_base
+    [zero?]
+    compair eq id k_0
+
+define step
+    [recursiu fact]
+    compair mul fst segon
 
 define factorial
-    [n!]
-    primrec is_base k_1 fact_step
+    [x!]
+    primrec is_base k_1 step

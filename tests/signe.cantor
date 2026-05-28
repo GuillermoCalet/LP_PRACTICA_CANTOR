@@ -1,0 +1,11 @@
+main signe
+
+import anterior
+
+define aparella_amb_anterior
+    [Aparella x amb el seu predecessor]
+    pair id anterior
+
+define signe
+    [Signe: 0 per 0, 1 per la resta]
+    comp diff aparella_amb_anterior
